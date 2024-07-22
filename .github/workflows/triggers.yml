@@ -1,0 +1,49 @@
+name: my-trigger
+run-name: my-cool-trigger
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  workflow_dispatch:
+    inputs:
+      language:
+        description: "best language evah"
+        required: true
+        default: "Javascript"
+        type: choice
+        options: ["Javascript", "Python", "Ruby"]
+      name:
+        description: "ur name"
+        required: true
+        type: string
+        default: "shrek"
+jobs:
+  my-trigger-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: run echo language
+        if: ${{ inputs.language }}
+        run: echo "best language, ${{ inputs.language }}"
+      - name: runs echo nombre
+        if: ${{ inputs.name }}
+        run: echo "greetings, ${{ inputs.name }}"
+  runs-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: runs Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: crear variable
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
+      - name: runs the script
+        run: node src/index.js
