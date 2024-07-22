@@ -1,0 +1,16 @@
+name: my-cool-action
+on: [push]
+jobs:
+  run-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: print hello word
+        run: echo "Hello, world!"
+      - name: runs Node 14
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: runs the script
+        run: node index.js
