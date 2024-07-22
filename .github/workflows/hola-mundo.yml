@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: 20.x
       - name: runs the script
-        run: node index.js
+        run: node src/index.js
