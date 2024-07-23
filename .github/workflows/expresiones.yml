@@ -1,5 +1,6 @@
-name: my-expresion-action
-run-name: my-cool-expresion-action
+name: my-expression-action
+run-name: my-cool-expression-action
+
 on:
   workflow_dispatch:
     inputs:
@@ -7,12 +8,12 @@ on:
         description: "number"
         required: true
         default: "1"
-        type: number
+        type: string
       number2:
         description: "number"
         required: true
         default: "1"
-        type: number
+        type: string
 jobs:
   my-expression-job:
     runs-on: ubuntu-latest
