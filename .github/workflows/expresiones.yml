@@ -30,9 +30,15 @@ jobs:
           echo "::set-output name=sum::$SUM"
       - name: Output the sum
         run: echo "The calculated sum is ${{ steps.sum.outputs.sum }}"
-      - name: show Nota
-        if: ${{ steps.sum.outputs.sum }} > 15
-        run: echo "PASSED"
-      - name: show Nota
-        if: ${{ steps.sum.outputs.sum }} < 15
-        run: echo "FAILED"
+      - name: Determine Result
+        id: determine_result
+        run: |
+          SUM=${{ steps.sum.outputs.sum }}
+          if [ "$SUM" -gt 15 ]; then
+            echo "::set-output name=result::PASSED"
+          else
+            echo "::set-output name=result::FAILED"
+          fi
+
+      - name: Show Result
+        run: echo "${{ steps.determine_result.outputs.result }}"
