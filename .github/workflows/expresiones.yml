@@ -1,5 +1,4 @@
 name: my-expression-action
-run-name: my-cool-expression-action
 
 on:
   workflow_dispatch:
@@ -20,19 +19,5 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Sum two numbers
-        id: sum
-        run: |
-          NUMBER1=${{ inputs.number1 }}
-          NUMBER2=${{ inputs.number2 }}
-          SUM=$((NUMBER1 + NUMBER2))
-          echo "The sum of $NUMBER1 and $NUMBER2 is $SUM"
-          echo "::set-output name=sum::$SUM"
       - name: Output the sum
-        run: echo "The calculated sum is ${{ steps.sum.outputs.sum }}"
-      - name: show Nota
-        if: ${{ steps.sum.outputs.sum }} > 15
-        run: echo "PASSED"
-      - name: show Nota
-        if: ${{ steps.sum.outputs.sum }} < 15
-        run: echo "FAILED"
+        run: echo "The calculated sum is 1"
